@@ -1,28 +1,42 @@
 .page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 15rem;
-    background-color: #eeeeee;
-    width: 100%;
-    height: 100vh;
-    color: #5e5e5e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeee;
+  width: 100%;
+  height: 100vh;
+  color: #5e5e5e;
 }
 
 .logoContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo {
+  width: 70%;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-left: 15rem;
+  }
+
+  .logoContainer {
     width: 30%;
-}
+  }
 
-.logo{
+  .logo {
     width: 70%;
-}
+  }
 
-.title {
+  .title {
     margin-block: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+  }
 }

@@ -7,8 +7,7 @@ export default function Home() {
       <div className={styles.logoContainer}>
         <img src="../images/logo-cinza.png" alt="logo" className={styles.logo}/>
         <p className={styles.subtitle}>A tecnologia a favor do seu negócio</p>
-      </div>
-      
+      </div>      
     </div>
   );
 }

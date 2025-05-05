@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   color: #5e5e5e;
 }
 
@@ -21,6 +20,7 @@
   right: 0;
   z-index: 1000;
   margin: 1rem;
+  display: none;
 }
 
 .logoDev {

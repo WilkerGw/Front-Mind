@@ -1,9 +1,8 @@
-// erp-otica\src\app\dashboard\page.js
 'use client';
 
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import styles from './dashboard.module.css';
+import styles from '../../components/styles/ResultadosDashboard.module.css';
 import moment from 'moment';
 import {
   LineChart, Line, XAxis, YAxis, 
