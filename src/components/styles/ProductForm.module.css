@@ -7,10 +7,6 @@
     padding: 1rem;
   }
   
-  .formTitle{
-    margin-bottom: 3rem;
-  }
-  
   
   .detalhesTitle {
     width: 100%;
@@ -31,11 +27,13 @@
     border-radius: 4px;
     border: 1px solid #ccc;
     font-size: 1rem;
+    width: 100%;
   }
   
   .form label{
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
   
   @media (min-width: 768px) {
@@ -45,10 +43,7 @@
       justify-content: center;
       width: 100%;
     }
-  
-    .form {
-      width: 50%;
-    }
+
   }
   
   

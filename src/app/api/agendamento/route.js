@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// GET: Busca todos os agendamentos
 export async function GET() {
   try {
     const response = await axios.get('http://localhost:5000/api/agendamento');
@@ -14,6 +15,7 @@ export async function GET() {
   }
 }
 
+// POST: Cria um novo agendamento
 export async function POST(request) {
   const data = await request.json();
   try {
@@ -30,6 +32,7 @@ export async function POST(request) {
   }
 }
 
+// PUT: Atualiza um agendamento
 export async function PUT(request) {
   const { id } = request.nextUrl.searchParams;
   const data = await request.json();
@@ -46,10 +49,11 @@ export async function PUT(request) {
   }
 }
 
+// DELETE: Exclui um agendamento
 export async function DELETE(request) {
   const { id } = request.nextUrl.searchParams;
   try {
-    await axios.delete(`http://localhost:5000/api/agendamento/${id}`);
+    const response = await axios.delete(`http://localhost:5000/api/agendamento/${id}`);
     return new Response(null, { status: 204 });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {

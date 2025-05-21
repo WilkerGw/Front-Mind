@@ -1,87 +1,77 @@
-'use client';
-
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import styles from '../../components/styles/ResultadosDashboard.module.css';
-import moment from 'moment';
-import {
-  LineChart, Line, XAxis, YAxis, 
-  CartesianGrid, Tooltip, Legend, 
-  ResponsiveContainer
-} from 'recharts';
+"use client";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import styles from "../../components/styles/Dashboard.module.css";
+import moment from "moment";
 
 export default function Dashboard() {
   const [totalSales, setTotalSales] = useState(0);
-  const [salesHistory, setSalesHistory] = useState([]);
+  const [dailyTotal, setDailyTotal] = useState(0);
+  const [monthlyTotal, setMonthlyTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTotal = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('/api/sales/total');
-        setTotalSales(response.data.total);
+        // Total geral
+        const totalResponse = await axios.get("/api/sales/total");
+        setTotalSales(totalResponse.data.total);
+
+        // Total diário
+        const dailyResponse = await axios.get("/api/sales/daily");
+        setDailyTotal(dailyResponse.data.dailyTotal);
+
+        // Total mensal
+        const monthlyResponse = await axios.get("/api/sales/monthly");
+        setMonthlyTotal(monthlyResponse.data.monthlyTotal);
+
+        setLoading(false);
       } catch (err) {
-        setError("Erro ao carregar total de vendas");
-      } finally {
+        setError("Erro ao carregar dados do dashboard");
         setLoading(false);
       }
     };
-    fetchTotal();
+
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchHistory = async () => {
-      try {
-        const response = await axios.get('/api/sales/history');
-        setSalesHistory(response.data);
-      } catch (err) {
-        setError("Erro ao carregar histórico de vendas");
-      }
-    };
-    fetchHistory();
-  }, []);
+  if (loading) return <p>Carregando...</p>;
+  if (error) return <p>{error}</p>;
+
+  let dailySalesClass;
+  if (dailyTotal < 2500) {
+    dailySalesClass = styles.red;
+  } else if (dailyTotal >= 2500 && dailyTotal <= 5000) {
+    dailySalesClass = styles.orange;
+  } else if (dailyTotal > 5000) {
+    dailySalesClass = styles.green;
+  } else {
+    dailySalesClass = styles.default; // caso contrário, mantém o padrão
+  }
 
   return (
     <div className={styles.dashboard}>
-      <div class={styles.titleContainer}>
-        <h1 className={styles.title}>Dashboard de Vendas</h1>
-        {/* Painel de Total */}
-        <div className={styles.totalPanel}>
-          <h2>Total de Vendas</h2>
-          <div className={styles.totalValue}>
-            R$ {totalSales.toFixed(2)}
-          </div>
-        </div>
+      <div className={styles.titleContainer}>
+        <h1 className={styles.title}>Dashboard</h1>
       </div>
 
-      {/* Gráfico de Histórico */}
-      <div className={styles.chartContainer}>
-        {loading ? (
-          <div className="loading">Carregando...</div>
-        ) : error ? (
-          <div className="error">{error}</div>
-        ) : (
-          <ResponsiveContainer width="100%" aspect={3}>
-            <LineChart data={salesHistory}>
-              <CartesianGrid stroke="#f5f5f5" />
-              <XAxis 
-                dataKey="day"
-                tickFormatter={(tick) => moment(tick).format('DD/MM')}
-                angle={-45}
-                textAnchor="end"
-              />
-              <YAxis />
-              <Tooltip />
-              <Line 
-                type="monotone" 
-                dataKey="sales" 
-                stroke="#8884d8" 
-                name="Vendas Diárias" 
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        )}
+      <div className={styles.statsContainer}>
+        <div className={styles.totalPanel}>
+          <h2 className={styles.totalTitle}>Total Diário</h2>
+          <div className={styles.totalValue}>
+            <p className={`${styles.ptotalValue} ${dailySalesClass}`}>
+              R$ {dailyTotal.toFixed(2)}
+            </p>
+          </div>
+        </div>
+
+        <div className={styles.totalPanel}>
+          <h2 className={styles.totalTitle}>Total Mensal</h2>
+          <div className={styles.totalValue}>
+            <p className={styles.ptotalValue}>R$ {monthlyTotal.toFixed(2)}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

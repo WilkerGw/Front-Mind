@@ -1,20 +1,34 @@
 .dashboard {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  padding-top: 5rem;
 }
 
-.titleContainer {
+.filtros {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.labelFilter {
   display: flex;
   align-items: center;
-  width: 100%;
-  justify-content: space-between;
   padding: 1rem;
+  border-radius: 0.3rem;
+  background: linear-gradient(to right, #5e5e5e, #9e9e9e);
+  color: #eeeeeea6;
+  font-weight: bold;
+  gap: 0.5rem;
 }
 
 .title {
+  text-transform: uppercase;
+  color: #5e5e5e;
   font-size: 1.3rem;
+}
+
+.formTitle{
+  text-align: center;
+  margin-block: 2rem;
 }
 
 .form {
@@ -26,42 +40,114 @@
   height: auto;
 }
 
-
-
 .detalhesContainer {
   display: flex;
-  align-items: start;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  height: 100vh;
   width: 100%;
-  margin: 0 auto;
+  height: auto;
 }
 
-.lista{
+.detalhesHeader,
+.detalhesGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.detalhesAgendamentoCont {
+  display: flex;
+  flex-direction: column;
+  width: 100%;  
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.lista {
   width: 100%;
   margin: 0 auto;
 }
 
 .titleLista {
   display: flex;
-  justify-content: center;
   justify-content: space-between;
   text-transform: uppercase;
   margin-bottom: 1rem;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 10px #0000004d;
   padding: 1rem;
+  color: #5e5e5e;
+  font-weight: lighter;
 }
 
-.statusAberto{
+.listaBtnsContainer {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.dataAgendamento {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.pTelephone,
+.pHour,
+.pCpf,
+.pCode,
+.pBirthDate {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.statusAberto {
   color: #f38e21;
 }
 
-.statusPago{
+.statusPago {
   color: #008000;
 }
 
-.statusAtrasado{
+.statusAtrasado {
   color: #ff0000;
+}
+
+.whatsButton {
+  width: 2.5rem;
+  transition: all .7s ease;
+}
+
+.whatsButton:hover {
+  transform: rotate(20deg);
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+  gap: 3rem;
+  padding: 1rem;
+}
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.green {
+  color: green;
+}
+
+.default {
+  color: black;
 }
 
 @media (min-width: 768px) {
@@ -71,19 +157,38 @@
     flex-direction: column;
     max-width: 1580px;
     margin: 0 auto;
+    width: 100%;
   }
-  
+
+  .totalValue{
+    font-size: 1rem;
+  }
+
   .titleContainer {
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding: 1rem;
   }
-  
+
   .title {
     font-size: 1.3rem;
   }
-  
+
+  .totalTitle {
+    color: #5e5e5e;
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .ptotalValue {
+    font-size: .9rem;
+    padding-left: .3rem;
+    font-weight: bold;
+    margin-top: .2rem;
+  }
+
   .form {
     display: flex;
     flex-direction: column;
@@ -92,43 +197,45 @@
     width: 100%;
     height: auto;
   }
-  
-  
-  
+
   .detalhesContainer {
     display: flex;
-    align-items: start;
+    align-items: center;
     flex-direction: column;
     height: 100vh;
-    width: 75%;
+    width: 50%;
     margin: 0 auto;
+    gap: 1rem;
   }
-  
-  .lista{
+
+  .lista {
     width: 80%;
     margin: 0 auto;
   }
-  
+
   .titleLista {
     display: flex;
-    justify-content: center;
     justify-content: space-between;
+    align-items: center;
     text-transform: uppercase;
     margin-bottom: 1rem;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px #5e5e5e50;
     padding: 1rem;
   }
-  
-  .statusAberto{
+
+  .statusAberto {
     color: #f38e21;
   }
-  
-  .statusPago{
+
+  .statusPago {
     color: #008000;
   }
-  
-  .statusAtrasado{
+
+  .statusAtrasado {
     color: #ff0000;
   }
 
+  .formContainer{
+    padding-block: 5rem;
+  }
 }

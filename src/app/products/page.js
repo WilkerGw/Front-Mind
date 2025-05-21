@@ -41,7 +41,7 @@ export default function Products() {
         <ul className={styles.lista}>
           {products.map((product) => (
             <li key={product._id} className={styles.titleLista}>
-              {product.name} - {product.code}
+              <div class={styles.dataContainer}><p class={styles.pName}>{product.name}</p><p class={styles.pCode}>{product.code}</p></div>
               <Link href={`/products/${product._id}`}>
                 <button>Detalhes</button>
               </Link>

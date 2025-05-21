@@ -10,27 +10,26 @@ const AgendamentoForm = ({ onSubmit }) => {
     observation: ''
   });
 
-  const formatAgendamentoCode = useCallback((code) => {
-    const cleanedCode = code.replace(/-/g, ''); 
-    if (cleanedCode.length > 2) {
-      const prefix = cleanedCode.slice(0, -2);
-      const suffix = cleanedCode.slice(-2);
-      return `${prefix}-${suffix}`;
+  const formatTelephone = useCallback((tel) => {
+    const cleaned = ('' + tel).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{2})(\d{1})(\d{4})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + ' ' + match[3] + '-' + match[4];
     }
-    return cleanedCode;
+    return tel;
   }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'code') {
+    const { name, value, type, checked } = e.target;
+    if (name === 'telephone') {
       setFormData({
         ...formData,
-        [name]: formatAgendamentoCode(value)
+        [name]: formatTelephone(value)
       });
     } else {
       setFormData({
         ...formData,
-        [name]: value
+        [name]: type === 'checkbox' ? checked : value
       });
     }
   };
@@ -47,18 +46,16 @@ const AgendamentoForm = ({ onSubmit }) => {
         <input
           type="text"
           name="name"
-          placeholder=""
           value={formData.name}
           onChange={handleChange}
           required
         />
       </label>
       <label>
-        Telefone
+        Telefone/WhatsApp
         <input
           type="text"
           name="telephone"
-          placeholder=""
           value={formData.telephone}
           onChange={handleChange}
           required
@@ -69,7 +66,6 @@ const AgendamentoForm = ({ onSubmit }) => {
         <input
           type="date"
           name="date"
-          placeholder=""
           value={formData.date}
           onChange={handleChange}
           required
@@ -80,19 +76,17 @@ const AgendamentoForm = ({ onSubmit }) => {
         <input
           type="time"
           name="hour"
-          placeholder=""
           value={formData.hour}
           onChange={handleChange}
           required
         />
       </label>
       <label>
-        Observação
+        Observação
         <input
           type="text"
           name="observation"
-          placeholder=""
-          value={formData.observation}          
+          value={formData.observation}
           onChange={handleChange}
         />
       </label>
